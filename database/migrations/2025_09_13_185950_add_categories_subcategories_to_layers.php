@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('layers', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_category')->nullable();
             $table->foreign('id_category')
-                    ->references('id') // The primary key column of the referenced table
-                    ->on('layers_categories') // The table being referenced
-                    ->onDelete('cascade'); // Optional: specify action on parent deletion (e.g., 'cascade', 'set null', 'restrict')
+                  ->references('id')->on('layers_categories')
+                  ->onDelete('cascade'); // opcional
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('layers', function (Blueprint $table) {
-            $table->('id_category')->nullable();
+            $table->dropColumn('id_category');
         });
     }
 };

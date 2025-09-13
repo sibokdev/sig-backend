@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
+            $table->unsignedBigInteger('id_category')->nullable();
             // Define the foreign key constraint
             $table->foreign('id_category')
                     ->references('id') // The primary key column of the referenced table
