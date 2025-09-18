@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('layers', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_config')->nullable();
+            $table->foreign('id_config')
+                  ->references('id')->on('layers_config')
+                  ->onDelete('cascade'); // opcional
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+       $table->dropColumn('id_config');
+    }
+};
