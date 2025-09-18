@@ -30,3 +30,5 @@ Route::post('/layers/{id}',[LayerController::class,'store']);
 Route::get('/layers/{id}',[LayerController::class,'show']);
 Route::delete('/layers/{id}',[LayerController::class,'destroy']);
 Route::get('/layers/{id}/download',[LayerController::class,'downloadFile']);
+Route::get('/layers/{id}/config',[LayerController::class,'getConfigById']);
+
