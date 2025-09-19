@@ -11,7 +11,7 @@ class LayerController extends Controller
     public function index(){ return response()->json(Layer::all()); }
 
     public function store(Request $request){
-        $v = Validator::make($request->all(), [
+       /* $v = Validator::make($request->all(), [
             'name'=>'nullable|string|max:120',
             'layer'=>'required|file',
             'states_idstates'=>'nullable|integer',
@@ -28,13 +28,13 @@ class LayerController extends Controller
             $content = file_get_contents($file->getRealPath());
             $decoded = json_decode($content,true);
             if($decoded!==null) $geojson = $decoded;
-        }
+        }*/
         $max = Layer::max('idlayers') ?? 0;
         $layer = Layer::create([
             'idlayers' => $max + 1,
-            'name' => $request->input('name') ?? $file->getClientOriginalName(),
-            'geojson' => $geojson,
-            'kmlfileLocation' => $path,
+            'name' => $request->input('name') ,//?? $file->getClientOriginalName(),
+            'geojson' => null,
+            'kmlfileLocation' => $request->input('kmlfileLocation') ,
             'states_idstates' => $request->input('states_idstates'),
             'municipality_idmunicipality' => $request->input('municipality_idmunicipality'),
             'section_idsection' => $request->input('section_idsection'),
@@ -43,6 +43,43 @@ class LayerController extends Controller
     }
 
     public function show($id){ return response()->json(Layer::findOrFail($id)); }
+
+    public function getAllStatesLayers(){
+         $states = Layer::select('states_idstates')->distinct()->get();
+
+         return response()->json($states);
+    }
+    public function getLayersByState($stateid){
+         $layers = Layer::where('states_idstates', $stateid)->get();
+
+         return response()->json($layers);
+    }
+
+    public function getLayersByMunicipality($stateid,$municipalityid){
+         $layers = Layer::where('states_idstates', $stateid)
+              ->where('municipality_idmunicipality', $municipalityid)
+              ->get();
+
+         return response()->json($layers);
+    }
+
+    public function getMinimalNational(){
+         $states = Layer::select(['idlayers','name'])->distinct()->get();
+
+         return response()->json($states);
+    }
+
+     public function getMinimalStateById($stateid){
+         $states = Layer::select(['idlayers','name'])->where('states_idstates', $stateid)->get();
+
+         return response()->json($states);
+    }
+
+    public function getMinimalMunicipalityById($municipalityid){
+         $states = Layer::select(['idlayers','name'])->where('municipality_idmunicipality', $municipalityid)->get();
+
+         return response()->json($states);
+    }
 
     public function destroy($id){
         $layer = Layer::findOrFail($id);

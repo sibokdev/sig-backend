@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "ae22c6f5-b7ae-49a6-9eba-7932c1fad54b",
+		"name": "sig_backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14889069"
+	},
+	"item": [
+		{
+			"name": "StateById",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/layers/states/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"layers",
+						"states",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LayerById",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/layers/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"layers",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MunicipalityById",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/layers/states/3/municipalities/29007",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"layers",
+						"states",
+						"3",
+						"municipalities",
+						"29007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InsertLayers",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"capa ejemplo 2\",\r\n        \"geojson\": null,\r\n        \"kmlfileLocation\": \"kjh \",\r\n        \"states_idstates\": 4,\r\n        \"municipality_idmunicipality\": 29007,\r\n        \"section_idsection\": null,\r\n        \"updated_at\": \"2025-09-18T23:50:27.000000Z\",\r\n        \"created_at\": \"2025-09-18T23:50:27.000000Z\",\r\n        \"idlayers\": 1   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/layers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"layers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MinimalNational",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/layers/minimal/nacional",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"layers",
+						"minimal",
+						"nacional"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MinimalMunicipalityById",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/layers/minimal/municipality/29007",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"layers",
+						"minimal",
+						"municipality",
+						"29007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MinimalStatesById",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/layers/minimal/states/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"layers",
+						"minimal",
+						"states",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
