@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LayerController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\MunicipalityController;
+use App\Http\Controllers\Auth\AuthController;
 
 Route::get('/states',[StateController::class,'index']);
 Route::get('/states/{id}',[StateController::class,'show']);
@@ -39,3 +40,6 @@ Route::delete('/layers/{id}',[LayerController::class,'destroy']);
 Route::get('/layers/{id}/download',[LayerController::class,'downloadFile']);
 Route::get('/layers/{id}/config',[LayerController::class,'getConfigById']);
 
+Route::post('login', [AuthController::class, 'login']);
+Route::get('me', [AuthController::class, 'me'])->middleware('auth:api');
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
