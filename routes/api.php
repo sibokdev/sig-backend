@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\LayerController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\MunicipalityController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\TableDataController;
 
 Route::get('/states',[StateController::class,'index']);
 Route::get('/states/{id}',[StateController::class,'show']);
@@ -50,3 +51,5 @@ Route::get('/layers/config/{id}',[LayerController::class,'getConfigById']);
 Route::post('login', [AuthController::class, 'login']);
 Route::get('me', [AuthController::class, 'me'])->middleware('auth:api');
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
+
+Route::post('/table/{config}/upload-csv', [TableDataController::class, 'uploadCsv']);
