@@ -11,4 +11,5 @@ class Layer extends Model
     public function state(){ return $this->belongsTo(State::class,'states_idstates','idstates'); }
     public function municipality(){ return $this->belongsTo(Municipality::class,'municipality_idmunicipality','idmunicipality'); }
     public function section(){ return $this->belongsTo(Section::class,'section_idsection','idsection'); }
+    public function config(){ return $this->belongsTo(Config::class,'id_config','id'); }
 }

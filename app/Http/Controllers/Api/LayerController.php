@@ -151,7 +151,8 @@ class LayerController extends Controller
     }
 
     public function getConfigById($id){
-        return response()->json(Config::find($id)); 
+          $layer = Layer::findOrFail($id);
+          return response()->json($layer->config); // usa la relación
     }
 
 }
