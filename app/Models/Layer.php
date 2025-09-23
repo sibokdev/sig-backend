@@ -6,7 +6,7 @@ class Layer extends Model
     protected $table = 'layers';
     protected $primaryKey = 'idlayers';
     public $incrementing = true;
-    protected $fillable = ['name','geojson','kmlfileLocation','states_idstates','municipality_idmunicipality','section_idsection'];
+    protected $fillable = ['name','geojson','kmlfileLocation','states_idstates','municipality_idmunicipality','section_idsection','id_config' ];
     protected $casts = ['geojson' => 'array'];
     public function state(){ return $this->belongsTo(State::class,'states_idstates','idstates'); }
     public function municipality(){ return $this->belongsTo(Municipality::class,'municipality_idmunicipality','idmunicipality'); }

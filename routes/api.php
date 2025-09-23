@@ -18,9 +18,15 @@ Route::get('/categories/{id}',[MunicipalityController::class,'show']);
 Route::get('/categories/{id}/subcatgories',[MunicipalityController::class,'show']);
 
 Route::get('/layers',[LayerController::class,'index']);
+Route::get('/layers/minimal',[LayerController::class,'getMinimalAllLayers']);
 Route::get('/layers/minimal/nacional',[LayerController::class,'getMinimalNational']);
 Route::get('/layers/minimal/states/{stateid}',[LayerController::class,'getMinimalStateById']);
 Route::get('/layers/minimal/municipality/{municipalityid}',[LayerController::class,'getMinimalMunicipalityById']);
+
+
+Route::get('/layers/minimal/states',[LayerController::class,'getMinimalStates']);
+Route::get('/layers/minimal/municipality',[LayerController::class,'getMinimalMunicipality']);
+Route::get('/layers/minimal/sections',[LayerController::class,'getMinimalSections']);
 
 Route::get('/layers/countries',[LayerController::class,'getAllCountryLayers']);
 Route::get('/layers/countries/{countryId}',[LayerController::class,'getLayerByCountry']);
@@ -38,7 +44,8 @@ Route::post('/layers',[LayerController::class,'store']);
 Route::get('/layers/{id}',[LayerController::class,'show']);
 Route::delete('/layers/{id}',[LayerController::class,'destroy']);
 Route::get('/layers/{id}/download',[LayerController::class,'downloadFile']);
-Route::get('/layers/{id}/config',[LayerController::class,'getConfigById']);
+Route::post('/layers/config/{id}',[LayerController::class,'saveLayerConfig']);
+Route::get('/layers/config/{id}',[LayerController::class,'getConfigById']);
 
 Route::post('login', [AuthController::class, 'login']);
 Route::get('me', [AuthController::class, 'me'])->middleware('auth:api');
