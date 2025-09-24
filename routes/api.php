@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\LayerController;
 use App\Http\Controllers\Api\StateController;
 use App\Http\Controllers\Api\MunicipalityController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\TableDataController;
+use App\Http\Controllers\Api\TableDataController;
 
 Route::get('/states',[StateController::class,'index']);
 Route::get('/states/{id}',[StateController::class,'show']);
@@ -52,4 +52,9 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('me', [AuthController::class, 'me'])->middleware('auth:api');
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
+//Route::post('/table/dt/upload-csv', [TableDataController::class, 'uploadCsv']);
+Route::post('/table/config', [TableDataController::class, 'saveTableConfig']);
+Route::get('/table/config/{configId}', [TableDataController::class, 'getTableConfig']);
+Route::get('/table/{config}/data', [TableDataController::class, 'getData']);
+Route::post('/table/{config}/data', [TableDataController::class, 'store']);
 Route::post('/table/{config}/upload-csv', [TableDataController::class, 'uploadCsv']);

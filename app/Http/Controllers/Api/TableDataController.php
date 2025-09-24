@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Api;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\TableConfig;
 use App\Models\TableData;
@@ -9,6 +9,17 @@ use League\Csv\Reader;
 
 class TableDataController extends Controller
 {
+    public function saveTableConfig(Request $request){
+        $max = TableConfig::max('id') ?? 0;
+        $config = TableConfig::create([
+            'id' => $max + 1,
+            'table_name' => $request->input('tableName'),
+            'config' => json_encode($request->input('config')),
+        ]);
+
+        return response()->json(['ok'=>true,'config'=>$config],201);
+    }
+
     public function uploadCsv(Request $request, TableConfig $config)
     {
         $request->validate([
@@ -49,4 +60,40 @@ class TableDataController extends Controller
             'total_records' => count($records)
         ]);
     }
+
+    public function getTableConfig(){
+         $tablconfig = TableConfig::where('id', 1)->get();
+
+         return response()->json($tablconfig);
+    }
+
+     public function getData(TableConfig $config)
+    {
+        $records = TableData::where('config_id', $config->id)->get();
+
+        // Decodificar cada registro antes de devolverlo
+        $decoded = $records->map(function ($r) {
+            return $r->data;
+        });
+
+        return response()->json($decoded);
+    }
+
+    public function store(Request $request, TableConfig $config)
+    {
+        $validated = $request->validate([
+            'data' => 'required|array'
+        ]);
+
+        $record = TableData::create([
+            'config_id' => $config->id,
+            'data' => $validated['data']
+        ]);
+
+        return response()->json([
+            'message' => 'Registro guardado correctamente',
+            'record' => $record->data
+        ]);
+    }
+
 }
