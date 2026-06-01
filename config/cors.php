@@ -6,7 +6,7 @@ if ($env === 'local') {
     $allowedMethods = ['*'];
     $allowedHeaders = ['*'];
 } else {
-    $allowedOrigins = ['https://miapp.com'];
+    $allowedOrigins = ['https://sig.pvmitienda.com'];
     $allowedMethods = ['GET','POST','PUT','DELETE'];
     $allowedHeaders = ['Content-Type','X-Requested-With','Authorization'];
 }
